@@ -39,8 +39,14 @@ grunt
 Now, when your grunt watch is running, qss/skin.qss will be generated after you save any change in styl/*.styl file
 
 ## Demo Application
+
+Don't forget to install dependencies:
+```bash
+pip install -r requirements
+```
+
 By running
-```cmd
+```bash
 python main.py
 ```
 
