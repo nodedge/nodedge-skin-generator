@@ -19,6 +19,10 @@ If you want to setup different files, just modify the Gruntfile.js for yourself 
 Happy coding! ;)
 
 
+# Prerequisities
+* Node.js - https://nodejs.org
+* Python 3.x - https://www.python.org/ 
+
 # Instalation
 
 You need to have nodejs installed. You can donwload it from https://nodejs.org.

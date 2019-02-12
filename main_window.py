@@ -56,11 +56,11 @@ class MainWindow(QMainWindow):
         self.helpMenu.addAction(self.actAbout)
 
     def initActions(self):
-        self.actNew = QAction("&New", self, shortcut='Ctrl+Z', statusTip="Undo", triggered=self.noop)
-        self.actOpen = QAction("&Open", self, shortcut='Ctrl+Z', statusTip="Undo", triggered=self.noop)
-        self.actSave = QAction("&Save", self, shortcut='Ctrl+Z', statusTip="Undo", triggered=self.noop)
-        self.actSaveAs = QAction("Save &As", self, shortcut='Ctrl+Z', statusTip="Undo", triggered=self.noop)
-        self.actExit = QAction("E&xit", self, shortcut='Ctrl+Z', statusTip="Undo", triggered=self.noop)
+        self.actNew = QAction("&New", self, shortcut='Ctrl+N', statusTip="Undo", triggered=self.noop)
+        self.actOpen = QAction("&Open", self, shortcut='Ctrl+O', statusTip="Undo", triggered=self.noop)
+        self.actSave = QAction("&Save", self, shortcut='Ctrl+S', statusTip="Undo", triggered=self.noop)
+        self.actSaveAs = QAction("Save &As", self, statusTip="Undo", triggered=self.noop)
+        self.actExit = QAction("E&xit", self, shortcut='Ctrl+Q', statusTip="Undo", triggered=self.noop)
 
         self.actUndo = QAction("&Undo", self, shortcut='Ctrl+Z', statusTip="Undo", triggered=self.noop)
         self.actRedo = QAction("&Redo", self, shortcut='Ctrl+Y', statusTip="Redo", triggered=self.noop)
@@ -70,6 +70,8 @@ class MainWindow(QMainWindow):
         self.actDelete = QAction("&Delete", self, shortcut='Del', statusTip="Redo", triggered=self.noop)
 
         self.actAbout = QAction("&About", self, statusTip="About this app", triggered=self.about)
+
+        self.actRedo.setEnabled(False)
 
     def noop(self):
         pass
@@ -92,6 +94,40 @@ class MainWindow(QMainWindow):
     def closeEvent(self, event):
         self.writeSettings()
         event.accept()
+
+    def createComboBoxWithQSSStyleSheets(self):
+        self.skinCombo = QComboBox()
+        self.refreshSkinCombo()
+        # self.skinCombo.setCurrentText(TestWindow.stylesheet_filename)
+
+        self.skinCombo.currentTextChanged.connect(self.onSkinChanged)
+        return self.skinCombo
+
+    def refreshSkinCombo(self):
+        last_text = self.skinCombo.currentText()
+        if last_text == "": last_text = self.__class__.stylesheet_filename
+        print("last skin:", last_text)
+
+        for i in range(len(self.skinCombo)): self.skinCombo.removeItem(0)
+
+        for dirname, subdirs, filelist in os.walk(os.path.join(os.path.dirname(__file__), 'qss')):
+            for fname in filelist:
+                name = os.path.join("qss", fname)
+                self.skinCombo.addItem(name)
+
+        print("Refreshed Skin Combo from qss/ directory...")
+
+        # in app we use /, this work for linux and even my woe, but it's woe... again
+        # we need to do some hacking -.-
+        last_text = last_text.replace('/', os.path.sep)
+
+        print("setting skin to:", last_text)
+        self.skinCombo.setCurrentText(last_text)
+
+    def onSkinChanged(self, name):
+        print("Skin change to:", name)
+        self.__class__.stylesheet_filename = os.path.join(os.path.dirname(__file__), name)
+        self.reload_stylesheet()
 
     def load_default_skin(self, num_style_key=2):
         if num_style_key is None: return        # ignore setting default style when passed None
