@@ -1,3 +1,4 @@
+import os
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from main_window import MainWindow
@@ -178,6 +179,8 @@ class MainContent(QWidget):
         tw.addTab(QLabel(), "Tab2 Super Name")
         tw.addTab(QLabel(), "Tab3")
         lay.addWidget(tw)
+
+        lay.addWidget(QLabel("Another label"))
 
         lay.addStretch()
 

@@ -1,14 +1,14 @@
 # Introduction
 This is a QSS files generator for Qt framework (https://www.qt.io/). Instead of writing qss files on your own,
-you use Stylus (http://stylus-lang.com/ and with nodejs and mainly Grunt (https://gruntjs.com/),
+you use Stylus (http://stylus-lang.com/) and with Node.js (https://nodejs.org/en/), and mainly Grunt (https://gruntjs.com/),
 a watch task will be running on background and your qss will be generated just by saving of your source *.styl files to disk!
 
 Using Stylus for the job solves bunch of issues in Qt (probably caused by taking Web's CSS technology and breaking it so badly):
+* variables
+* functions
 * overrides
 * nested selectors
 * parent referencing
-* variables
-* functions
 * and more!
 
 By default there is /styl folder containing your Stylus source files which is being watched and compiled into /qss directory. 
@@ -18,10 +18,6 @@ If you want to setup different files, just modify the Gruntfile.js for yourself 
 
 Happy coding! ;)
 
-
-# Prerequisities
-* Node.js - https://nodejs.org
-* Python 3.x - https://www.python.org/ 
 
 # Instalation
 
@@ -43,14 +39,8 @@ grunt
 Now, when your grunt watch is running, qss/skin.qss will be generated after you save any change in styl/*.styl file
 
 ## Demo Application
-
-Don't forget to install dependencies:
-```bash
-pip install -r requirements
-```
-
 By running
-```bash
+```cmd
 python main.py
 ```
 

@@ -53,7 +53,7 @@ module.exports = function(grunt) {
                 overwrite: true,
                 src: [      // source files array
                     'qss/skin.qss',
-                    'qss/nodestyle.qss',
+                    'qss/nodeeditor.qss',
                     'qss/dark.qss',
                 ],
                 replacements: [
@@ -67,12 +67,12 @@ module.exports = function(grunt) {
             compile: {
                 options: {
                     paths: ['styl'],
-                    compress: true,
+                    compress: false,
                 },
                 files: {
                     'qss/skin.qss': 'build/skin.styl',
                     'qss/dark.qss': 'build/dark/skin.styl',
-                    'qss/nodestyle.qss': 'build/nodestyle.styl',
+                    'qss/nodeeditor.qss': 'build/nodeeditor.styl',
                 }
             }
         },
@@ -85,11 +85,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // register default task
-    grunt.registerTask('default', [
-        'copy:to_build',
-        'replace:pre',
-        'stylus:compile',
-        'replace:post',
-        'watch'
-    ]);
+    grunt.registerTask('default', ['copy:to_build','replace:pre','stylus:compile','replace:post','watch']);
 }
