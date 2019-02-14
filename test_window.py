@@ -1,4 +1,5 @@
 import os
+from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from main_window import MainWindow
@@ -7,7 +8,6 @@ from main_window import MainWindow
 class TestWindow(MainWindow):
 
     def initUI(self):
-        super().initUI()
 
         self.initDocks()
 
@@ -23,14 +23,31 @@ class TestWindow(MainWindow):
         child = MainContent(self)
         w1 = self.mdiArea.addSubWindow(QLabel())
         w1.setWindowTitle("QLabel")
+        w1.setWindowIcon(QIcon("."))    # using non-existing icon disables the icon
         w2 = self.mdiArea.addSubWindow(QTextEdit())
         w2.setWindowTitle("QTextEdit")
+        w2.setWindowIcon(QIcon("."))
         w3 = self.mdiArea.addSubWindow(QTextEdit())
         w3.setWindowTitle("QTextEdit")
+        w3.setWindowIcon(QIcon("."))
         swnd = self.mdiArea.addSubWindow(child)
+        swnd.setWindowIcon(QIcon("."))
+
+        super().initUI()
+
         swnd.setWindowTitle("Demo Widgets")
 
+    def initActions(self):
+        super().initActions()
+        self.actTile = QAction("&Tile", self, statusTip="Tile the windows", triggered=self.mdiArea.tileSubWindows)
+        self.actCascade = QAction("&Cascade", self, statusTip="Cascade the windows", triggered=self.mdiArea.cascadeSubWindows)
 
+
+    def initMenus(self):
+        super().initMenus()
+        self.windowMenu = self.menuBar().addMenu("&Window")
+        self.windowMenu.addAction(self.actTile)
+        self.windowMenu.addAction(self.actCascade)
 
     def initDocks(self):
         dock = QDockWidget("Files", self)
