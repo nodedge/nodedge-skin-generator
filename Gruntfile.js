@@ -7,7 +7,11 @@ module.exports = function(grunt) {
         watch: {
             styl: {
                 files: ['styl/*.styl', 'styl/**'],
-                tasks: ['copy:to_build','replace:pre','stylus:compile','replace:post',
+                tasks: [
+                    'copy:to_build',
+                    'replace:pre',
+                    'stylus:compile',
+                    'replace:post',
                     'copy:to_dist'
                 ],
             },
@@ -28,6 +32,7 @@ module.exports = function(grunt) {
                     cwd: '.',
                     dest: './dist/',
                     src: [
+                        // here put your existing files to copy them to `dest`
                         //'qss/nodeeditor.qss',
                         //'qss/skin.qss'
                     ],
@@ -99,6 +104,11 @@ module.exports = function(grunt) {
 
     // register default task
     grunt.registerTask('default', [
-        'copy:to_build','replace:pre','stylus:compile','replace:post', 'copy:to_dist', 'watch'
+        'copy:to_build',
+        'replace:pre',
+        'stylus:compile',
+        'replace:post',
+        'copy:to_dist',
+        'watch'
     ]);
 }
