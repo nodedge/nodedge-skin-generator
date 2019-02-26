@@ -7,7 +7,9 @@ module.exports = function(grunt) {
         watch: {
             styl: {
                 files: ['styl/*.styl', 'styl/**'],
-                tasks: ['copy:to_build','replace:pre','stylus:compile','replace:post'],
+                tasks: ['copy:to_build','replace:pre','stylus:compile','replace:post',
+                    'copy:to_dist'
+                ],
             },
         },
 
@@ -19,6 +21,17 @@ module.exports = function(grunt) {
                     dest: 'build/',
                     src: ['**'],
                     expand: true,
+                }]
+            },
+            to_dist: {
+                files: [{
+                    cwd: '.',
+                    dest: './dist/',
+                    src: [
+                        //'qss/nodeeditor.qss',
+                        //'qss/skin.qss'
+                    ],
+                    expand: false,
                 }]
             }
         },
@@ -85,5 +98,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // register default task
-    grunt.registerTask('default', ['copy:to_build','replace:pre','stylus:compile','replace:post','watch']);
+    grunt.registerTask('default', [
+        'copy:to_build','replace:pre','stylus:compile','replace:post', 'copy:to_dist', 'watch'
+    ]);
 }
