@@ -1,6 +1,9 @@
+**This project is a fork of [Qt Skin generator](https://gitlab.com/pavel.krupala/qt-skin-generator), made by Pavel Krupala, and applied to Nodedge.** 
+
 # Introduction
-This is a QSS files generator for Qt framework (https://www.qt.io/). Instead of writing qss files on your own,
-you use Stylus (http://stylus-lang.com/) and with Node.js (https://nodejs.org/en/), and mainly Grunt (https://gruntjs.com/),
+
+This is a QSS files generator for  [Qt framework](https://www.qt.io/). Instead of writing qss files on your own,
+you use [Stylus](http://stylus-lang.com/) and with [Node.js](https://nodejs.org/en/), and mainly [Grunt](https://gruntjs.com/),
 a watch task will be running on background and your qss will be generated just by saving of your source *.styl files to disk!
 
 Using Stylus for the job solves bunch of issues in Qt (probably caused by taking Web's CSS technology and breaking it so badly):
@@ -19,7 +22,7 @@ If you want to setup different files, just modify the Gruntfile.js for yourself 
 Happy coding! ;)
 
 
-# Instalation
+# Installation
 
 You need to have nodejs installed. You can donwload it from https://nodejs.org.
 Then install all he dependencies from package.json by typing: 

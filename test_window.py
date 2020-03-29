@@ -1,12 +1,13 @@
-import os
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from main_window import MainWindow
+from nodedge.mdi_widget import MdiWidget
 
 
 class TestWindow(MainWindow):
 
+    # noinspection PyAttributeOutsideInit
     def initUI(self):
 
         self.initDocks()
@@ -19,16 +20,14 @@ class TestWindow(MainWindow):
         self.mdiArea.setTabsClosable(True)
         self.mdiArea.setTabsMovable(True)
         self.setCentralWidget(self.mdiArea)
+        
+        self.onSkinChanged("qss/nodedge.qss")
 
         child = MainContent(self)
-        w1 = self.mdiArea.addSubWindow(QLabel())
-        w1.setWindowTitle("QLabel")
-        w1.setWindowIcon(QIcon("."))    # using non-existing icon disables the icon
-        w2 = self.mdiArea.addSubWindow(QTextEdit())
-        w2.setWindowTitle("QTextEdit")
-        w2.setWindowIcon(QIcon("."))
-        w3 = self.mdiArea.addSubWindow(QTextEdit())
-        w3.setWindowTitle("QTextEdit")
+        nodedge = MdiWidget()
+        nodedge.loadFile("examples/example.json")
+        w3 = self.mdiArea.addSubWindow(nodedge)
+        w3.setWindowTitle("Nodedge")
         w3.setWindowIcon(QIcon("."))
         swnd = self.mdiArea.addSubWindow(child)
         swnd.setWindowIcon(QIcon("."))
@@ -41,7 +40,6 @@ class TestWindow(MainWindow):
         super().initActions()
         self.actTile = QAction("&Tile", self, statusTip="Tile the windows", triggered=self.mdiArea.tileSubWindows)
         self.actCascade = QAction("&Cascade", self, statusTip="Cascade the windows", triggered=self.mdiArea.cascadeSubWindows)
-
 
     def initMenus(self):
         super().initMenus()
@@ -93,7 +91,6 @@ class TestWindow(MainWindow):
         return wdg
 
 
-
 class MainContent(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -104,7 +101,6 @@ class MainContent(QWidget):
         self.createBottomContent()
         self.createLeftContent()
         self.createRightContent()
-
 
     def createBottomContent(self):
         lay = QHBoxLayout(self.bottom)
@@ -158,8 +154,6 @@ class MainContent(QWidget):
         qtex = QTextEdit("Some TextEdit text for editing...")
         qtex.setMaximumHeight(50)
         lay.addWidget(qtex)
-
-
         lay.addStretch()
 
         # right part
@@ -173,8 +167,6 @@ class MainContent(QWidget):
         qsc = QScrollBar(Qt.Vertical)
         qsc.setValue(50)
         lay.addWidget(qsc)
-
-
 
     def createRightContent(self):
         lay = QVBoxLayout(self.topright)
@@ -200,7 +192,6 @@ class MainContent(QWidget):
         lay.addWidget(QLabel("Another label"))
 
         lay.addStretch()
-
 
     def createBasicLayout(self):
         self.hbox = QHBoxLayout(self)

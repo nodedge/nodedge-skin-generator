@@ -71,7 +71,7 @@ module.exports = function(grunt) {
                 overwrite: true,
                 src: [      // source files array
                     'qss/skin.qss',
-                    'qss/nodeeditor.qss',
+                    'qss/nodedge.qss',
                     'qss/dark.qss',
                 ],
                 replacements: [
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
                 files: {
                     'qss/skin.qss': 'build/skin.styl',
                     'qss/dark.qss': 'build/dark/skin.styl',
-                    'qss/nodeeditor.qss': 'build/nodeeditor.styl',
+                    'qss/nodedge.qss': 'build/nodedge.styl',
                 }
             }
         },

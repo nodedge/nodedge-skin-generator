@@ -11,8 +11,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.organization = 'Blenderfreak'
-        self.application = 'QSS Style Tester'
+        self.organization = 'Nodedge'
+        self.application = 'Nodedge QSS style generator'
 
         self.load_default_skin()
 
@@ -30,7 +30,7 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage("Ready")
         self.initActions()
         self.initMenus()
-        self.setWindowTitle("BlenderFreak's QSS Style Tester")
+        self.setWindowTitle("Nodedge style generator")
 
     def initMenus(self):
         self.fileMenu = self.menuBar().addMenu("&File")
